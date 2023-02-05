@@ -2,13 +2,13 @@
 
 ## What I used
 
-- express
-- ejs, ejs-mate
-- mongoose
-- dotenv
-- bootstrap
-- method-override
-- axios
+- **express**- Framework for creating node app
+- **ejs, ejs-mate**- Templating language to generate HTML markup with plain JavaScript
+- **mongoose**- Library to interact with *mongoDB* database
+- **dotenv**- To get secrets from env file
+- **bootstrap**- Frontend library for quick and ready-made styles
+- **method-override**- To use all routes in html forms
+- **axios**- For http requests
 
 ## Steps completed
 
