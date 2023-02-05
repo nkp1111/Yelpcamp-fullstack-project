@@ -2,20 +2,30 @@
   <h1 class="text-center">New Campground</h1>
 
   <div class="col-6 offset-3">
-    <form action="/campground" method="POST">
+    <form action="/campground" method="POST" class="validated-form" novalidate>
+
       <div class="mb-3">
         <label for="title" class="form-label">Title</label>
-        <input type="text" name="title" id="name" class="form-control">
+        <input type="text" name="title" id="name" class="form-control" required>
+        <div class="valid-feedback">
+          Looks good!
+        </div>
       </div>
 
       <div class="mb-3">
         <label for="location" class="form-label">Location</label>
-        <input type="text" name="location" id="location" class="form-control">
+        <input type="text" name="location" id="location" class="form-control" required>
+        <div class="valid-feedback">
+          Looks good!
+        </div>
       </div>
 
       <div class="mb-3">
         <label for="image" class="form-label">Image Url</label>
-        <input type="url" name="image" id="image" class="form-control">
+        <input type="url" name="image" id="image" class="form-control" required>
+        <div class="valid-feedback">
+          Looks good!
+        </div>
       </div>
 
       <div class="mb-3">
@@ -23,13 +33,19 @@
         <div class="input-group">
           <span class="input-group-text" id="form-price">$</span>
           <input type="number" class="form-control" placeholder="0.00" aria-label="price" aria-describedby="form-price"
-            name="price">
+            name="price" required>
+          <div class="valid-feedback">
+            Looks good!
+          </div>
         </div>
       </div>
 
       <div class="mb-3">
         <label for="description" class="form-label">Description</label>
-        <textarea name="description" id="description" class="form-control"></textarea>
+        <textarea name="description" id="description" class="form-control" required></textarea>
+        <div class="valid-feedback">
+          Looks good!
+        </div>
       </div>
 
       <div class="mb-3">
@@ -37,6 +53,3 @@
       </div>
     </form>
   </div>
-
-
-  <a href="/campground">All Campgrounds</a>

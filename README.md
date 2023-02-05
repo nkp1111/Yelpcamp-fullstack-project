@@ -28,3 +28,6 @@
     - Add dummy image and description for database
     - Add basic style to index file
     - Add basic style to all route files
+
+3. Errors and Validating data
+   - Add client side form validation
