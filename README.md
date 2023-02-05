@@ -14,3 +14,4 @@
 
 2. Adding basic styles
     - Add ejs-mate library for layout
+    - Add bootstrap links, navbar and footer
