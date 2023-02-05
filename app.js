@@ -3,6 +3,7 @@ const mongoose = require("mongoose")
 require("dotenv").config()
 const app = express()
 const methodOverride = require("method-override")
+const ejsMate = require("ejs-mate")
 const { Campground } = require("./models/campground")
 
 // mongoose connection
@@ -16,13 +17,13 @@ mongoose.connect(process.env["MONGO_URI"])
   })
 
 // basic app configuration
+app.engine("ejs", ejsMate)
 app.set("views", __dirname + "/views")
 app.set("view engine", "ejs")
 
 // app middleware
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride("_method"))
-
 
 // app routes
 app.get("/", (req, res) => {

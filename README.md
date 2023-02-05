@@ -11,3 +11,6 @@
     - GET and POST route to add new campground
     - GET and PUT route to update campground
     - DELETE route to delete campground
+
+2. Adding basic styles
+    - Add ejs-mate library for layout
