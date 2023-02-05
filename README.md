@@ -1,5 +1,15 @@
 # Yelpcamp-fullstack-project
 
+## What I used
+
+- express
+- ejs, ejs-mate
+- mongoose
+- dotenv
+- bootstrap
+- method-override
+- axios
+
 ## Steps completed
 
 1. Yelpcamp campground CRUD
@@ -15,3 +25,4 @@
 2. Adding basic styles
     - Add ejs-mate library for layout
     - Add bootstrap links, navbar and footer
+    - Add dummy image and description for database

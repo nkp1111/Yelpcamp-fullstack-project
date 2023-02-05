@@ -3,6 +3,7 @@ const { Campground } = require("../models/campground")
 const cities = require("./cities")
 require("dotenv").config()
 const { places, descriptors } = require("./seedHelpers")
+const { getImage } = require("./image")
 
 // mongoose connection
 mongoose.connect(process.env["MONGO_URI"])
@@ -22,9 +23,13 @@ const seedDB = async () => {
   await Campground.deleteMany()
   for (let i = 0; i < 50; i++) {
     const randomCity = sample(cities)
+    const imageDescription = await getImage()
     const newCamp = new Campground({
       title: `${sample(descriptors)} ${sample(places)}`,
       location: `${randomCity.city}, ${randomCity.state}`,
+      description: imageDescription.description,
+      image: imageDescription.imageUrl,
+      price: Math.floor(Math.random() * 20) + 10
     })
     await newCamp.save()
   }
