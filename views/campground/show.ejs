@@ -16,7 +16,13 @@
     <%= campground.location %>
   </h2>
 
-  <a href="/campground">All campgrounds</a>
+  <p>
+    <a href="/campground/<%= campground._id %>/edit">Edit campground</a>
+  </p>
+  <footer>
+    <a href="/campground">All campgrounds</a>
+  </footer>
+
 </body>
 
 </html>

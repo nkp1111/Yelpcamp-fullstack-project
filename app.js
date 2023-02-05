@@ -2,6 +2,7 @@ const express = require("express")
 const mongoose = require("mongoose")
 require("dotenv").config()
 const app = express()
+const methodOverride = require("method-override")
 const { Campground } = require("./models/campground")
 
 // mongoose connection
@@ -17,7 +18,10 @@ mongoose.connect(process.env["MONGO_URI"])
 // basic app configuration
 app.set("views", __dirname + "/views")
 app.set("view engine", "ejs")
+
+// app middlewares
 app.use(express.urlencoded({ extended: true }))
+app.use(methodOverride("_method"))
 
 
 // app routes
@@ -39,12 +43,24 @@ app.get("/campground/new", (req, res) => {
 
 app.post("/campground", async (req, res) => {
   const { title, location } = req.body
-  console.log(title, location)
   let newCamp = Campground({
     title, location
   })
   newCamp = await newCamp.save()
   res.redirect(`/campground/${newCamp._id}`)
+})
+
+// edit a campground
+app.get("/campground/:id/edit", async (req, res) => {
+  const { id } = req.params
+  const campground = await Campground.findById(id)
+  res.render("campground/edit", { campground })
+})
+
+app.put("/campground/:id", async (req, res) => {
+  const { id } = req.params
+  const campground = await Campground.findByIdAndUpdate(id, { ...req.body })
+  res.redirect(`/campground/${id}`)
 })
 
 // view one campground detail
