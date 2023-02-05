@@ -26,3 +26,5 @@
     - Add ejs-mate library for layout
     - Add bootstrap links, navbar and footer
     - Add dummy image and description for database
+    - Add basic style to index file
+    - Add basic style to all route files

@@ -1,17 +1,42 @@
 <% layout("layout/boilerplate") %>
-  <h1>Add new Campgrounds</h1>
+  <h1 class="text-center">New Campground</h1>
 
-  <form action="/campground" method="POST">
-    <div>
-      <label for="title">Title</label>
-      <input type="text" name="title" id="name">
-    </div>
-    <div>
-      <label for="location">Location</label>
-      <input type="text" name="location" id="location">
-    </div>
+  <div class="col-6 offset-3">
+    <form action="/campground" method="POST">
+      <div class="mb-3">
+        <label for="title" class="form-label">Title</label>
+        <input type="text" name="title" id="name" class="form-control">
+      </div>
 
-    <button>Submit</button>
-  </form>
+      <div class="mb-3">
+        <label for="location" class="form-label">Location</label>
+        <input type="text" name="location" id="location" class="form-control">
+      </div>
+
+      <div class="mb-3">
+        <label for="image" class="form-label">Image Url</label>
+        <input type="url" name="image" id="image" class="form-control">
+      </div>
+
+      <div class="mb-3">
+        <label for="price" class="form-label">Price</label>
+        <div class="input-group">
+          <span class="input-group-text" id="form-price">$</span>
+          <input type="number" class="form-control" placeholder="0.00" aria-label="price" aria-describedby="form-price"
+            name="price">
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label">Description</label>
+        <textarea name="description" id="description" class="form-control"></textarea>
+      </div>
+
+      <div class="mb-3">
+        <button class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+
 
   <a href="/campground">All Campgrounds</a>
