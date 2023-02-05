@@ -25,10 +25,19 @@ app.get("/", (req, res) => {
 })
 
 // campground routes
+// view all campgrounds
 app.get("/campground", async (req, res) => {
   let campgrounds = await Campground.find({})
   res.render("campground/index", { campgrounds })
 })
+
+// view one campground detail
+app.get("/campground/:id", async (req, res) => {
+  const { id } = req.params
+  const campground = await Campground.findById(id)
+  res.render("campground/show", { campground })
+})
+
 
 app.listen("3000", () => {
   console.log("App is listening on port 3000");

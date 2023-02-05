@@ -9,16 +9,14 @@
 </head>
 
 <body>
-  <h1>All Campgrounds</h1>
-  <ul>
-    <% for (let camp of campgrounds) { %>
-      <li>
-        <a href="/campground/<%= camp._id %>">
-          <%= camp.title%>
-        </a>
-      </li>
-      <%} %>
-  </ul>
+  <h1>
+    <%= campground.title %>
+  </h1>
+  <h2>
+    <%= campground.location %>
+  </h2>
+
+  <a href="/campground">All campgrounds</a>
 </body>
 
 </html>

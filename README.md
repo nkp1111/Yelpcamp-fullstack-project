@@ -7,3 +7,4 @@
     - Mongo connection
     - Add starting data to database
     - GET route to view all campgrounds
+    - GET route for one campground detail view
