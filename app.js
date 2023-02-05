@@ -17,6 +17,7 @@ mongoose.connect(process.env["MONGO_URI"])
 // basic app configuration
 app.set("views", __dirname + "/views")
 app.set("view engine", "ejs")
+app.use(express.urlencoded({ extended: true }))
 
 
 // app routes
@@ -29,6 +30,21 @@ app.get("/", (req, res) => {
 app.get("/campground", async (req, res) => {
   let campgrounds = await Campground.find({})
   res.render("campground/index", { campgrounds })
+})
+
+// create new campground
+app.get("/campground/new", (req, res) => {
+  res.render("campground/new")
+})
+
+app.post("/campground", async (req, res) => {
+  const { title, location } = req.body
+  console.log(title, location)
+  let newCamp = Campground({
+    title, location
+  })
+  newCamp = await newCamp.save()
+  res.redirect(`/campground/${newCamp._id}`)
 })
 
 // view one campground detail
