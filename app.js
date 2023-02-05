@@ -19,7 +19,7 @@ mongoose.connect(process.env["MONGO_URI"])
 app.set("views", __dirname + "/views")
 app.set("view engine", "ejs")
 
-// app middlewares
+// app middleware
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride("_method"))
 
@@ -61,6 +61,13 @@ app.put("/campground/:id", async (req, res) => {
   const { id } = req.params
   const campground = await Campground.findByIdAndUpdate(id, { ...req.body })
   res.redirect(`/campground/${id}`)
+})
+
+// delete a campground
+app.delete("/campground/:id", async (req, res) => {
+  const { id } = req.params
+  await Campground.findByIdAndDelete(id)
+  res.redirect("/campground")
 })
 
 // view one campground detail
