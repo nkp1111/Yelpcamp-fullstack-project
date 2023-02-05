@@ -24,12 +24,10 @@ app.get("/", (req, res) => {
   res.render("home")
 })
 
-app.get("/makeCamp", async (req, res) => {
-  let camp = new Campground({
-    title: "new one"
-  })
-  let newCamp = await camp.save()
-  res.send(newCamp)
+// campground routes
+app.get("/campground", async (req, res) => {
+  let campgrounds = await Campground.find({})
+  res.render("campground/index", { campgrounds })
 })
 
 app.listen("3000", () => {

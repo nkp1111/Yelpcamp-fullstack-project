@@ -6,3 +6,4 @@
     - Basic express app
     - Mongo connection
     - Add starting data to database
+    - GET route to view all campgrounds
