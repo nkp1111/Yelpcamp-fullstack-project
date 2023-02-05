@@ -4,3 +4,4 @@
 
 1. Yelpcamp campground CRUD
     - Basic express app
+    - Mongo connection
