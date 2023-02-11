@@ -5,6 +5,7 @@ const app = express()
 const methodOverride = require("method-override")
 const ejsMate = require("ejs-mate")
 const catchAsync = require("./utils/catchAsync")
+const { ExpressError } = require("./utils/expressError")
 const { Campground } = require("./models/campground")
 
 // mongoose connection
@@ -78,11 +79,19 @@ app.get("/campground/:id", catchAsync(async (req, res) => {
   res.render("campground/show", { campground })
 }))
 
-// custom error route
-app.use((err, req, res, next) => {
-  res.send("something went wrong?")
+// unknown routes not defined in server
+app.all("*", (req, res, next) => {
+  next(new ExpressError("Page Not Found", 404))
 })
 
+// custom error route
+app.use((err, req, res, next) => {
+  const { statusCode = 500 } = err
+  if (!err.message) {
+    err.message = "Something Went Wrong"
+  }
+  res.status(statusCode).render("error", { err })
+})
 
 app.listen("3000", () => {
   console.log("App is listening on port 3000");

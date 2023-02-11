@@ -33,3 +33,4 @@
    - Add client side form validation
    - Add server side data validation
    - Add function to catch async errors
+   - Add error page layout
