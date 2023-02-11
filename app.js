@@ -4,6 +4,7 @@ require("dotenv").config()
 const app = express()
 const methodOverride = require("method-override")
 const ejsMate = require("ejs-mate")
+const catchAsync = require("./utils/catchAsync")
 const { Campground } = require("./models/campground")
 
 // mongoose connection
@@ -32,50 +33,54 @@ app.get("/", (req, res) => {
 
 // campground routes
 // view all campgrounds
-app.get("/campground", async (req, res) => {
+app.get("/campground", catchAsync(async (req, res) => {
   let campgrounds = await Campground.find({})
   res.render("campground/index", { campgrounds })
-})
+}))
 
 // create new campground
 app.get("/campground/new", (req, res) => {
   res.render("campground/new")
 })
 
-app.post("/campground", async (req, res) => {
-  const { title, location } = req.body
+app.post("/campground", catchAsync(async (req, res, next) => {
   let newCamp = Campground({
-    title, location
+    ...req.body
   })
   newCamp = await newCamp.save()
   res.redirect(`/campground/${newCamp._id}`)
-})
+}))
 
 // edit a campground
-app.get("/campground/:id/edit", async (req, res) => {
+app.get("/campground/:id/edit", catchAsync(async (req, res) => {
   const { id } = req.params
   const campground = await Campground.findById(id)
   res.render("campground/edit", { campground })
-})
+}))
 
-app.put("/campground/:id", async (req, res) => {
+app.put("/campground/:id", catchAsync(async (req, res) => {
   const { id } = req.params
   const campground = await Campground.findByIdAndUpdate(id, { ...req.body })
   res.redirect(`/campground/${id}`)
-})
+}))
 
 // delete a campground
-app.delete("/campground/:id", async (req, res) => {
+app.delete("/campground/:id", catchAsync(async (req, res) => {
   const { id } = req.params
   await Campground.findByIdAndDelete(id)
   res.redirect("/campground")
-})
+}))
 
 // view one campground detail
-app.get("/campground/:id", async (req, res) => {
+app.get("/campground/:id", catchAsync(async (req, res) => {
   const { id } = req.params
   const campground = await Campground.findById(id)
   res.render("campground/show", { campground })
+}))
+
+// custom error route
+app.use((err, req, res, next) => {
+  res.send("something went wrong?")
 })
 
 

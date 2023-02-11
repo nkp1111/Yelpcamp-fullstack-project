@@ -1,4 +1,4 @@
-# Yelpcamp-fullstack-project
+# YelpCamp-fullstack-project
 
 ## What I used
 
@@ -12,7 +12,7 @@
 
 ## Steps completed
 
-1. Yelpcamp campground CRUD
+1. YelpCamp campground CRUD
     - Basic express app
     - Mongo connection
     - Add starting data to database
@@ -31,3 +31,5 @@
 
 3. Errors and Validating data
    - Add client side form validation
+   - Add server side data validation
+   - Add function to catch async errors
