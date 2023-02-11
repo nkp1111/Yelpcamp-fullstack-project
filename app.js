@@ -7,6 +7,7 @@ const ejsMate = require("ejs-mate")
 const catchAsync = require("./utils/catchAsync")
 const { ExpressError } = require("./utils/expressError")
 const { Campground } = require("./models/campground")
+const { campgroundSchema } = require("./schemas")
 
 // mongoose connection
 mongoose.connect(process.env["MONGO_URI"])
@@ -26,6 +27,17 @@ app.set("view engine", "ejs")
 // app middleware
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride("_method"))
+// custom middleware
+const validateCampground = (req, res, next) => {
+  const { error } = campgroundSchema.validate(req.body)
+  if (error) {
+    let message = error.details.map(item => item.message).join(", ")
+    throw new ExpressError(message, 400)
+  } else {
+    next()
+  }
+}
+
 
 // app routes
 app.get("/", (req, res) => {
@@ -44,7 +56,8 @@ app.get("/campground/new", (req, res) => {
   res.render("campground/new")
 })
 
-app.post("/campground", catchAsync(async (req, res, next) => {
+app.post("/campground", validateCampground, catchAsync(async (req, res, next) => {
+
   let newCamp = Campground({
     ...req.body
   })
@@ -59,7 +72,7 @@ app.get("/campground/:id/edit", catchAsync(async (req, res) => {
   res.render("campground/edit", { campground })
 }))
 
-app.put("/campground/:id", catchAsync(async (req, res) => {
+app.put("/campground/:id", validateCampground, catchAsync(async (req, res) => {
   const { id } = req.params
   const campground = await Campground.findByIdAndUpdate(id, { ...req.body })
   res.redirect(`/campground/${id}`)

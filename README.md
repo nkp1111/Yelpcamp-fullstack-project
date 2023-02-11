@@ -9,6 +9,7 @@
 - **bootstrap**- Frontend library for quick and ready-made styles
 - **method-override**- To use all routes in html forms
 - **axios**- For http requests
+- **joi**- For server side data validation
 
 ## Steps completed
 
@@ -34,3 +35,5 @@
    - Add server side data validation
    - Add function to catch async errors
    - Add error page layout
+   - Add **joi** library for server side validation
+   - Add custom Middleware for validation using **joi**
