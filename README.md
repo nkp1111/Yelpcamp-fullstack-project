@@ -37,3 +37,6 @@
    - Add error page layout
    - Add **joi** library for server side validation
    - Add custom Middleware for validation using **joi**
+
+4. Adding the Reviews Model
+    - Add Review model

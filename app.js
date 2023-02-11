@@ -4,9 +4,13 @@ require("dotenv").config()
 const app = express()
 const methodOverride = require("method-override")
 const ejsMate = require("ejs-mate")
+// wrapper function for async errors
 const catchAsync = require("./utils/catchAsync")
+// custom error class
 const { ExpressError } = require("./utils/expressError")
+// database models
 const { Campground } = require("./models/campground")
+// joi schemas for validation
 const { campgroundSchema } = require("./schemas")
 
 // mongoose connection
