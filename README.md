@@ -43,3 +43,5 @@
     - Add Review form
     - POST route for adding review
     - Add Review data validation
+    - DELETE route for deleting review
+    - mongoose middleware for deleting reviews with campground
