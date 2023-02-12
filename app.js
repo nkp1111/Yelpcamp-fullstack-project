@@ -102,7 +102,7 @@ app.delete("/campground/:id", catchAsync(async (req, res) => {
 // view one campground detail
 app.get("/campground/:id", catchAsync(async (req, res) => {
   const { id } = req.params
-  const campground = await Campground.findById(id)
+  const campground = await Campground.findById(id).populate("reviews")
   res.render("campground/show", { campground })
 }))
 
@@ -117,6 +117,15 @@ app.post("/campground/:id/reviews", validateReview, catchAsync(async (req, res) 
   await campground.save()
   res.redirect(`/campground/${id}`)
 }))
+
+// delete a review from the campground
+app.delete("/campground/:id/reviews/:reviewId", catchAsync(async (req, res) => {
+  const { id, reviewId } = req.params
+  await Campground.findByIdAndUpdate(id, { $pull: { reviews: reviewId } })
+  await Review.findByIdAndDelete(reviewId)
+  res.redirect(`/campground/${id}`)
+}))
+
 
 // unknown routes not defined in server
 app.all("*", (req, res, next) => {
