@@ -54,3 +54,4 @@
     - Add public directory for static files
     - Add express-session for session management
     - Use connect-flash for sending flash messages
+    - Add bootstrap alert for flash message
