@@ -4,17 +4,12 @@ require("dotenv").config()
 const app = express()
 const methodOverride = require("method-override")
 const ejsMate = require("ejs-mate")
-// wrapper function for async errors
-const catchAsync = require("./utils/catchAsync")
 // custom error class
 const { ExpressError } = require("./utils/expressError")
-// database models
-const { Campground } = require("./models/campground")
-const { Review } = require("./models/reviews")
-// joi schemas for validation
-const { reviewSchema } = require("./schemas")
 // Express router
 const campgrounds = require("./routes/campgrounds")
+const reviews = require("./routes/reviews")
+
 
 // mongoose connection
 mongoose.connect(process.env["MONGO_URI"])
@@ -35,16 +30,6 @@ app.set("view engine", "ejs")
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride("_method"))
 
-const validateReview = (req, res, next) => {
-  const { error } = reviewSchema.validate(req.body)
-  if (error) {
-    let message = error.details.map(item => item.message).join(", ")
-    throw new ExpressError(message, 400)
-  } else {
-    next()
-  }
-}
-
 // app routes
 app.get("/", (req, res) => {
   res.render("home")
@@ -53,26 +38,8 @@ app.get("/", (req, res) => {
 // campground routes
 app.use("/campground", campgrounds)
 
-
-// create a new review for a campground
-app.post("/campground/:id/reviews", validateReview, catchAsync(async (req, res) => {
-  const { id } = req.params
-  const review = Review({ ...req.body })
-  const campground = await Campground.findById(id)
-  campground.reviews.push(review)
-  await review.save()
-  await campground.save()
-  res.redirect(`/campground/${id}`)
-}))
-
-// delete a review from the campground
-app.delete("/campground/:id/reviews/:reviewId", catchAsync(async (req, res) => {
-  const { id, reviewId } = req.params
-  await Campground.findByIdAndUpdate(id, { $pull: { reviews: reviewId } })
-  await Review.findByIdAndDelete(reviewId)
-  res.redirect(`/campground/${id}`)
-}))
-
+// reviews routes
+app.use("/campground/:id/reviews/", reviews)
 
 // unknown routes not defined in server
 app.all("*", (req, res, next) => {

@@ -48,3 +48,4 @@
 
 5. Restructuring
     - Express Router to separate campground routes
+    - Express Router to separate review routes
