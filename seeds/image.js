@@ -5,7 +5,7 @@ const baseUrl = "https://api.unsplash.com/collections/483251?client_id="
 
 const getImage = async () => {
   let imageUrl, description
-  await axios.get(baseUrl + process.env["ACCESS_KEY"])
+  await axios.get(baseUrl + process.env["SPLASH_ACCESS_KEY"])
     .then(data => {
       description = data.data.description
       imageUrl = data.data.preview_photos[0].urls.regular

@@ -5,6 +5,7 @@ const app = express()
 const methodOverride = require("method-override")
 const ejsMate = require("ejs-mate")
 const session = require("express-session")
+const flash = require("connect-flash")
 // custom error class
 const { ExpressError } = require("./utils/expressError")
 // Express router
@@ -26,7 +27,7 @@ mongoose.connect(process.env["MONGO_URI"])
 
 // configuration for express session middleware
 const sessionConfig = {
-  secret: "Agood secret mustbehidden",
+  secret: process.env["SESSION_SECRET_KEY"],
   resave: false,
   saveUninitialized: true,
   cookie: {
@@ -44,6 +45,13 @@ app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride("_method"))
 app.use(express.static(__dirname + "/public"))
 app.use(session(sessionConfig))
+app.use(flash())
+
+app.use((req, res, next) => {
+  res.locals.success = req.flash("success")
+  res.locals.error = req.flash("error")
+  next()
+})
 
 // app routes
 app.get("/", (req, res) => {

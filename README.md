@@ -11,6 +11,7 @@
 - **axios**- For http requests
 - **joi**- For server side data validation
 - **express-session**- For creating and managing session server side
+- **connect-flash**- For sending flash messages to client/user
 
 ## Steps completed
 
@@ -52,3 +53,4 @@
     - Express Router to separate review routes
     - Add public directory for static files
     - Add express-session for session management
+    - Use connect-flash for sending flash messages
