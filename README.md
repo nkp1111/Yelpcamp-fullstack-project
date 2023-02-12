@@ -61,3 +61,4 @@
 
 6. Adding Authentication
     - Add *passport, passport-local, passport-local-mongoose* library
+    - Add User model
