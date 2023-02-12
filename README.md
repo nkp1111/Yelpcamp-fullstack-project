@@ -45,3 +45,6 @@
     - Add Review data validation
     - DELETE route for deleting review
     - mongoose middleware for deleting reviews with campground
+
+5. Restructuring
+    - Express Router to separate campground routes

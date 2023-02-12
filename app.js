@@ -12,7 +12,9 @@ const { ExpressError } = require("./utils/expressError")
 const { Campground } = require("./models/campground")
 const { Review } = require("./models/reviews")
 // joi schemas for validation
-const { campgroundSchema, reviewSchema } = require("./schemas")
+const { reviewSchema } = require("./schemas")
+// Express router
+const campgrounds = require("./routes/campgrounds")
 
 // mongoose connection
 mongoose.connect(process.env["MONGO_URI"])
@@ -32,16 +34,6 @@ app.set("view engine", "ejs")
 // app middleware
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride("_method"))
-// custom middleware
-const validateCampground = (req, res, next) => {
-  const { error } = campgroundSchema.validate(req.body)
-  if (error) {
-    let message = error.details.map(item => item.message).join(", ")
-    throw new ExpressError(message, 400)
-  } else {
-    next()
-  }
-}
 
 const validateReview = (req, res, next) => {
   const { error } = reviewSchema.validate(req.body)
@@ -59,52 +51,7 @@ app.get("/", (req, res) => {
 })
 
 // campground routes
-// view all campgrounds
-app.get("/campground", catchAsync(async (req, res) => {
-  let campgrounds = await Campground.find({})
-  res.render("campground/index", { campgrounds })
-}))
-
-// create new campground
-app.get("/campground/new", (req, res) => {
-  res.render("campground/new")
-})
-
-app.post("/campground", validateCampground, catchAsync(async (req, res, next) => {
-
-  let newCamp = Campground({
-    ...req.body
-  })
-  newCamp = await newCamp.save()
-  res.redirect(`/campground/${newCamp._id}`)
-}))
-
-// edit a campground
-app.get("/campground/:id/edit", catchAsync(async (req, res) => {
-  const { id } = req.params
-  const campground = await Campground.findById(id)
-  res.render("campground/edit", { campground })
-}))
-
-app.put("/campground/:id", validateCampground, catchAsync(async (req, res) => {
-  const { id } = req.params
-  const campground = await Campground.findByIdAndUpdate(id, { ...req.body })
-  res.redirect(`/campground/${id}`)
-}))
-
-// delete a campground
-app.delete("/campground/:id", catchAsync(async (req, res) => {
-  const { id } = req.params
-  await Campground.findByIdAndDelete(id)
-  res.redirect("/campground")
-}))
-
-// view one campground detail
-app.get("/campground/:id", catchAsync(async (req, res) => {
-  const { id } = req.params
-  const campground = await Campground.findById(id).populate("reviews")
-  res.render("campground/show", { campground })
-}))
+app.use("/campground", campgrounds)
 
 
 // create a new review for a campground
