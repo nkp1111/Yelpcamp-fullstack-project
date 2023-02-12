@@ -10,6 +10,7 @@ const catchAsync = require("./utils/catchAsync")
 const { ExpressError } = require("./utils/expressError")
 // database models
 const { Campground } = require("./models/campground")
+const { Review } = require("./models/reviews")
 // joi schemas for validation
 const { campgroundSchema } = require("./schemas")
 
@@ -94,6 +95,18 @@ app.get("/campground/:id", catchAsync(async (req, res) => {
   const { id } = req.params
   const campground = await Campground.findById(id)
   res.render("campground/show", { campground })
+}))
+
+
+// create a new review for a campground
+app.post("/campground/:id/reviews", catchAsync(async (req, res) => {
+  const { id } = req.params
+  const review = Review({ ...req.body })
+  const campground = await Campground.findById(id)
+  campground.reviews.push(review)
+  await review.save()
+  await campground.save()
+  res.redirect(`/campground/${id}`)
 }))
 
 // unknown routes not defined in server

@@ -40,3 +40,5 @@
 
 4. Adding the Reviews Model
     - Add Review model
+    - Add Review form
+    - POST route for adding review
