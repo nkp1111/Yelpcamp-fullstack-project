@@ -49,3 +49,4 @@
 5. Restructuring
     - Express Router to separate campground routes
     - Express Router to separate review routes
+    - Add public directory for static files

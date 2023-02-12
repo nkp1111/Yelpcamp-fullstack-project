@@ -12,6 +12,7 @@ const reviews = require("./routes/reviews")
 
 
 // mongoose connection
+mongoose.set("strictQuery", false)
 mongoose.connect(process.env["MONGO_URI"])
   .then(() => {
     console.log("Mongoose connected")
@@ -21,6 +22,7 @@ mongoose.connect(process.env["MONGO_URI"])
     console.log(err)
   })
 
+
 // basic app configuration
 app.engine("ejs", ejsMate)
 app.set("views", __dirname + "/views")
@@ -29,6 +31,7 @@ app.set("view engine", "ejs")
 // app middleware
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride("_method"))
+app.use(express.static(__dirname + "/public"))
 
 // app routes
 app.get("/", (req, res) => {
