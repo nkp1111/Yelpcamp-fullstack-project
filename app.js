@@ -12,7 +12,7 @@ const { ExpressError } = require("./utils/expressError")
 const { Campground } = require("./models/campground")
 const { Review } = require("./models/reviews")
 // joi schemas for validation
-const { campgroundSchema } = require("./schemas")
+const { campgroundSchema, reviewSchema } = require("./schemas")
 
 // mongoose connection
 mongoose.connect(process.env["MONGO_URI"])
@@ -43,6 +43,15 @@ const validateCampground = (req, res, next) => {
   }
 }
 
+const validateReview = (req, res, next) => {
+  const { error } = reviewSchema.validate(req.body)
+  if (error) {
+    let message = error.details.map(item => item.message).join(", ")
+    throw new ExpressError(message, 400)
+  } else {
+    next()
+  }
+}
 
 // app routes
 app.get("/", (req, res) => {
@@ -99,7 +108,7 @@ app.get("/campground/:id", catchAsync(async (req, res) => {
 
 
 // create a new review for a campground
-app.post("/campground/:id/reviews", catchAsync(async (req, res) => {
+app.post("/campground/:id/reviews", validateReview, catchAsync(async (req, res) => {
   const { id } = req.params
   const review = Review({ ...req.body })
   const campground = await Campground.findById(id)
