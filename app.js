@@ -4,6 +4,7 @@ require("dotenv").config()
 const app = express()
 const methodOverride = require("method-override")
 const ejsMate = require("ejs-mate")
+const session = require("express-session")
 // custom error class
 const { ExpressError } = require("./utils/expressError")
 // Express router
@@ -23,6 +24,16 @@ mongoose.connect(process.env["MONGO_URI"])
   })
 
 
+// configuration for express session middleware
+const sessionConfig = {
+  secret: "Agood secret mustbehidden",
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24 * 7,
+  }
+}
+
 // basic app configuration
 app.engine("ejs", ejsMate)
 app.set("views", __dirname + "/views")
@@ -32,6 +43,7 @@ app.set("view engine", "ejs")
 app.use(express.urlencoded({ extended: true }))
 app.use(methodOverride("_method"))
 app.use(express.static(__dirname + "/public"))
+app.use(session(sessionConfig))
 
 // app routes
 app.get("/", (req, res) => {

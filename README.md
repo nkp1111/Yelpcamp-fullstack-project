@@ -10,6 +10,7 @@
 - **method-override**- To use all routes in html forms
 - **axios**- For http requests
 - **joi**- For server side data validation
+- **express-session**- For creating and managing session server side
 
 ## Steps completed
 
@@ -50,3 +51,4 @@
     - Express Router to separate campground routes
     - Express Router to separate review routes
     - Add public directory for static files
+    - Add express-session for session management
