@@ -28,7 +28,7 @@ router.post("/", validateReview, catchAsync(async (req, res) => {
   campground.reviews.push(review)
   await review.save()
   await campground.save()
-  req.flash("success", "Successfully updated review")
+  req.flash("success", "Successfully added new review")
   res.redirect(`/campground/${id}`)
 }))
 

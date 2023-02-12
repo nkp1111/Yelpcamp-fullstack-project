@@ -2,22 +2,25 @@
 
 ## What I used
 
-- **express**- Framework for creating node app
-- **ejs, ejs-mate**- Templating language to generate HTML markup with plain JavaScript
-- **mongoose**- Library to interact with *mongoDB* database
-- **dotenv**- To get secrets from env file
-- **bootstrap**- Frontend library for quick and ready-made styles
-- **method-override**- To use all routes in html forms
-- **axios**- For http requests
-- **joi**- For server side data validation
-- **express-session**- For creating and managing session server side
-- **connect-flash**- For sending flash messages to client/user
+- **express**- framework for creating node app
+- **ejs, ejs-mate**- templating language to generate HTML markup with plain JavaScript
+- **mongoose**- library to interact with *mongoDB* database
+- **dotenv**- to get secrets from env file
+- **bootstrap**- frontend library for quick and ready-made styles
+- **method-override**- to use all routes in html forms
+- **axios**- for http requests
+- **joi**- for server side data validation
+- **express-session**- for creating and managing session server side
+- **connect-flash**- for sending flash messages to client/user
+- **passport**- library for user/client authentication
+- **passport-local**- *passport* strategy for authenticating with username and password
+- **passport-local-mongoose**- simplifies building username and password login with passport
 
 ## Steps completed
 
 1. YelpCamp campground CRUD
-    - Basic express app
-    - Mongo connection
+    - Basic *express* app
+    - Mongo connection- *mongoose*
     - Add starting data to database
     - GET route to view all campgrounds
     - GET route for one campground detail view
@@ -26,7 +29,7 @@
     - DELETE route to delete campground
 
 2. Adding basic styles
-    - Add ejs-mate library for layout
+    - Add *ejs-mate* library for layout
     - Add bootstrap links, navbar and footer
     - Add dummy image and description for database
     - Add basic style to index file
@@ -37,8 +40,8 @@
    - Add server side data validation
    - Add function to catch async errors
    - Add error page layout
-   - Add **joi** library for server side validation
-   - Add custom Middleware for validation using **joi**
+   - Add *joi* library for server side validation
+   - Add custom Middleware for validation using *joi*
 
 4. Adding the Reviews Model
     - Add Review model
@@ -52,6 +55,9 @@
     - Express Router to separate campground routes
     - Express Router to separate review routes
     - Add public directory for static files
-    - Add express-session for session management
-    - Use connect-flash for sending flash messages
+    - Add *express-session* for session management
+    - Use *connect-flash* for sending flash messages
     - Add bootstrap alert for flash messages
+
+6. Adding Authentication
+    - Add *passport, passport-local, passport-local-mongoose* library
