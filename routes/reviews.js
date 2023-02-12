@@ -23,7 +23,7 @@ const validateReview = (req, res, next) => {
 // create a new review for a campground
 router.post("/", validateReview, catchAsync(async (req, res) => {
   const { id } = req.params
-  const review = Review({ ...req.body })
+  const review = new Review({ ...req.body })
   const campground = await Campground.findById(id)
   campground.reviews.push(review)
   await review.save()

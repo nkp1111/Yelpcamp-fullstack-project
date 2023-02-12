@@ -11,6 +11,11 @@ const { ExpressError } = require("./utils/expressError")
 // Express router
 const campgrounds = require("./routes/campgrounds")
 const reviews = require("./routes/reviews")
+// database model
+const { User } = require("./models/user")
+// passport
+const passport = require("passport")
+const LocalStrategy = require("passport-local")
 
 
 // mongoose connection
@@ -46,6 +51,12 @@ app.use(methodOverride("_method"))
 app.use(express.static(__dirname + "/public"))
 app.use(session(sessionConfig))
 app.use(flash())
+app.use(passport.initialize())
+app.use(passport.session())
+
+passport.use(new LocalStrategy(User.authenticate()))
+passport.serializeUser(User.serializeUser())
+passport.deserializeUser(User.deserializeUser())
 
 app.use((req, res, next) => {
   res.locals.success = req.flash("success")
@@ -56,6 +67,16 @@ app.use((req, res, next) => {
 // app routes
 app.get("/", (req, res) => {
   res.render("home")
+})
+
+app.get("/fakeUser", async (req, res) => {
+  const user = new User({
+    username: "nkp1111",
+    email: "n@gmail.com"
+  })
+  const password = "pass"
+  const newUser = await User.register(user, password)
+  res.send(newUser)
 })
 
 // campground routes

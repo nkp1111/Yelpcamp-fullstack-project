@@ -32,7 +32,7 @@ router.get("/new", (req, res) => {
 })
 
 router.post("/", validateCampground, catchAsync(async (req, res, next) => {
-  let newCamp = Campground({
+  let newCamp = new Campground({
     ...req.body
   })
   newCamp = await newCamp.save()
