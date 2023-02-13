@@ -75,6 +75,7 @@
     - Show edit/delete button only to author
     - Add middleware to verify author of campground
     - Add authorization for viewing review form and review submission
+    - Add authorization for review DELETE route
 
 ## Acknowledgement
 

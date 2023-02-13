@@ -59,7 +59,12 @@ router.delete("/:id", isLoggedIn, isAuthor, catchAsync(async (req, res) => {
 // view one campground detail
 router.get("/:id", catchAsync(async (req, res) => {
   const { id } = req.params
-  const campground = await Campground.findById(id).populate("reviews").populate("author")
+  const campground = await Campground.findById(id).populate({
+    path: "reviews",
+    populate: {
+      path: "author"
+    }
+  }).populate("author")
   if (!campground) {
     req.flash("error", "Campground cannot be found!")
     return res.redirect("/campground")

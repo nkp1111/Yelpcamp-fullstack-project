@@ -4,6 +4,7 @@ const { campgroundSchema, reviewSchema } = require("./schemas")
 const { ExpressError } = require("./utils/expressError")
 // database models
 const { Campground } = require("./models/campground")
+const { Review } = require("./models/reviews")
 
 // use joi library for campground form data validation
 const validateCampground = (req, res, next) => {
@@ -33,6 +34,16 @@ const isAuthor = async (req, res, next) => {
   }
   next()
 }
+// authorize current user for author permissions
+const isReviewAuthor = async (req, res, next) => {
+  const { id, reviewId } = req.params
+  const review = await Review.findById(reviewId)
+  if (!review.author.equals(req.user._id)) {
+    req.flash("error", "You do not have permission to do this.")
+    return res.redirect(`/campground/${id}`)
+  }
+  next()
+}
 // use joi library for review form data validation
 const validateReview = (req, res, next) => {
   const { error } = reviewSchema.validate(req.body)
@@ -49,4 +60,5 @@ module.exports = {
   isLoggedIn,
   isAuthor,
   validateReview,
+  isReviewAuthor,
 }

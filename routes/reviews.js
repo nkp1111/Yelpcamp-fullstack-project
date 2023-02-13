@@ -6,7 +6,7 @@ const { Review } = require("../models/reviews")
 // wrapper function for async errors
 const catchAsync = require("../utils/catchAsync")
 // middleware for authentication
-const { validateReview, isLoggedIn } = require("../middleware")
+const { validateReview, isLoggedIn, isReviewAuthor } = require("../middleware")
 // // custom error class
 // const { ExpressError } = require("../utils/expressError")
 
@@ -24,7 +24,7 @@ router.post("/", isLoggedIn, validateReview, catchAsync(async (req, res) => {
 }))
 
 // delete a review from the campground
-router.delete("/:reviewId", catchAsync(async (req, res) => {
+router.delete("/:reviewId", isLoggedIn, isReviewAuthor, catchAsync(async (req, res) => {
   const { id, reviewId } = req.params
   await Campground.findByIdAndUpdate(id, { $pull: { reviews: reviewId } })
   await Review.findByIdAndDelete(reviewId)
