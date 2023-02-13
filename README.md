@@ -65,6 +65,7 @@
     - Initialize passport and add user to database
     - Add register form for user
     - POST route for registering new user
+    - Add form and POST route for user login
 
 ## Acknowledgement
 
