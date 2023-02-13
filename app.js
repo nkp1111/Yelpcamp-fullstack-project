@@ -9,8 +9,9 @@ const flash = require("connect-flash")
 // custom error class
 const { ExpressError } = require("./utils/expressError")
 // Express router
-const campgrounds = require("./routes/campgrounds")
-const reviews = require("./routes/reviews")
+const campgroundRoutes = require("./routes/campgrounds")
+const reviewRoutes = require("./routes/reviews")
+const userRoutes = require("./routes/user")
 // database model
 const { User } = require("./models/user")
 // passport
@@ -69,21 +70,15 @@ app.get("/", (req, res) => {
   res.render("home")
 })
 
-app.get("/fakeUser", async (req, res) => {
-  const user = new User({
-    username: "nkp1111",
-    email: "n@gmail.com"
-  })
-  const password = "pass"
-  const newUser = await User.register(user, password)
-  res.send(newUser)
-})
+// user routes
+app.use("/", userRoutes)
 
 // campground routes
-app.use("/campground", campgrounds)
+app.use("/campground", campgroundRoutes)
 
 // reviews routes
-app.use("/campground/:id/reviews/", reviews)
+app.use("/campground/:id/reviews/", reviewRoutes)
+
 
 // unknown routes not defined in server
 app.all("*", (req, res, next) => {
