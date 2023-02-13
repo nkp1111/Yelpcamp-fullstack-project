@@ -77,6 +77,9 @@
     - Add authorization for viewing review form and review submission
     - Add authorization for review DELETE route
 
+8. Controllers and Star ratings
+    - Refactor campground routes separate control logic to controllers
+
 ## Acknowledgement
 
 This project was done following the final project of
