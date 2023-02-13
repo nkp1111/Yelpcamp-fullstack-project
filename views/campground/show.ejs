@@ -37,34 +37,36 @@
     </div>
 
     <div class="col-md-6 my-5">
-      <form action="/campground/<%= campground._id%>/reviews" method="POST" class="mb-3 validated-form" novalidate>
-        <h2>Leave a Review</h2>
-        <div class="mb-3">
-          <label for="rating" class="form-label">Rating</label>
-          <input type="range" name="rating" id="rating" class="form-control" min="1" max="5" required>
-        </div>
-        <div class="mb-3">
-          <label for="body" class="form-label">Review</label>
-          <textarea name="body" id="body" class="form-control" rows="3" required></textarea>
-          <div class="valid-feedback">
-            Looks good!
+      <% if(currentUser) { %>
+        <form action="/campground/<%= campground._id%>/reviews" method="POST" class="mb-3 validated-form" novalidate>
+          <h2>Leave a Review</h2>
+          <div class="mb-3">
+            <label for="rating" class="form-label">Rating</label>
+            <input type="range" name="rating" id="rating" class="form-control" min="1" max="5" required>
           </div>
-        </div>
-        <button class="btn btn-success">Submit</button>
-      </form>
+          <div class="mb-3">
+            <label for="body" class="form-label">Review</label>
+            <textarea name="body" id="body" class="form-control" rows="3" required></textarea>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+          </div>
+          <button class="btn btn-success">Submit</button>
+        </form>
+        <% } %>
 
-      <% for (let review of campground.reviews.reverse()) { %>
-        <div class="mb-3 card">
-          <div class="card-body">
-            <h5 class="card-title">Rating: <%= review.rating %>
-            </h5>
-            <p> Review: <%= review.body %>
-            </p>
-            <form action="/campground/<%= campground._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
-              <button class="btn btn-sm btn-danger">Delete</button>
-            </form>
-          </div>
-        </div>
-        <%} %>
+          <% for (let review of campground.reviews.reverse()) { %>
+            <div class="mb-3 card">
+              <div class="card-body">
+                <h5 class="card-title">Rating: <%= review.rating %>
+                </h5>
+                <p> Review: <%= review.body %>
+                </p>
+                <form action="/campground/<%= campground._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
+                  <button class="btn btn-sm btn-danger">Delete</button>
+                </form>
+              </div>
+            </div>
+            <%} %>
     </div>
   </div>

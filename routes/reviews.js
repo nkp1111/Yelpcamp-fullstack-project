@@ -6,14 +6,15 @@ const { Review } = require("../models/reviews")
 // wrapper function for async errors
 const catchAsync = require("../utils/catchAsync")
 // middleware for authentication
-const { validateReview } = require("../middleware")
+const { validateReview, isLoggedIn } = require("../middleware")
 // // custom error class
 // const { ExpressError } = require("../utils/expressError")
 
 // create a new review for a campground
-router.post("/", validateReview, catchAsync(async (req, res) => {
+router.post("/", isLoggedIn, validateReview, catchAsync(async (req, res) => {
   const { id } = req.params
   const review = new Review({ ...req.body })
+  review.author = req.user._id
   const campground = await Campground.findById(id)
   campground.reviews.push(review)
   await review.save()
