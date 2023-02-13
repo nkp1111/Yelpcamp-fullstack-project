@@ -72,6 +72,8 @@
 
 7. Basic Authorization
     - Update campground model and route to add author/user
+    - Show edit/delete button only to author
+    - Add middleware to verify author of campground
 
 ## Acknowledgement
 

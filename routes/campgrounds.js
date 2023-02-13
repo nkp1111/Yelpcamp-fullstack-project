@@ -22,6 +22,16 @@ const validateCampground = (req, res, next) => {
   }
 }
 
+const isAuthor = async (req, res, next) => {
+  const { id } = req.params
+  const campground = await Campground.findById(id)
+  if (!campground.author.equals(req.user._id)) {
+    req.flash("error", "You do not have permission to do this.")
+    return res.redirect(`/campground/${id}`)
+  }
+  next()
+}
+
 // view all campgrounds
 router.get("/", catchAsync(async (req, res) => {
   let campgrounds = await Campground.find({})
@@ -44,7 +54,7 @@ router.post("/", isLoggedIn, validateCampground, catchAsync(async (req, res, nex
 }))
 
 // edit a campground
-router.get("/:id/edit", isLoggedIn, catchAsync(async (req, res) => {
+router.get("/:id/edit", isLoggedIn, isAuthor, catchAsync(async (req, res) => {
   const { id } = req.params
   const campground = await Campground.findById(id)
   if (!campground) {
@@ -54,7 +64,7 @@ router.get("/:id/edit", isLoggedIn, catchAsync(async (req, res) => {
   res.render("campground/edit", { campground })
 }))
 
-router.put("/:id", isLoggedIn, validateCampground, catchAsync(async (req, res) => {
+router.put("/:id", isLoggedIn, isAuthor, validateCampground, catchAsync(async (req, res) => {
   const { id } = req.params
   const campground = await Campground.findByIdAndUpdate(id, { ...req.body })
   req.flash("success", "Successfully updated campground")
@@ -62,7 +72,7 @@ router.put("/:id", isLoggedIn, validateCampground, catchAsync(async (req, res) =
 }))
 
 // delete a campground
-router.delete("/:id", isLoggedIn, catchAsync(async (req, res) => {
+router.delete("/:id", isLoggedIn, isAuthor, catchAsync(async (req, res) => {
   const { id } = req.params
   await Campground.findByIdAndDelete(id)
   req.flash("success", "Successfully deleted campground")
