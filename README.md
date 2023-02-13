@@ -70,6 +70,9 @@
     - Add GET route for logout and update navbar links
     - Update register route for logging user
 
+7. Basic Authorization
+    - Update campground model and route to add author/user
+
 ## Acknowledgement
 
 This project was done following the final project of

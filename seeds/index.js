@@ -29,7 +29,8 @@ const seedDB = async () => {
       location: `${randomCity.city}, ${randomCity.state}`,
       description: imageDescription.description,
       image: imageDescription.imageUrl,
-      price: Math.floor(Math.random() * 20) + 10
+      price: Math.floor(Math.random() * 20) + 10,
+      author: "63ea21a790684abc7fe09a06",
     })
     await newCamp.save()
   }
