@@ -68,6 +68,7 @@
     - Add form and POST route for user login
     - Add middleware for verifying login
     - Add GET route for logout and update navbar links
+    - Update register route for logging user
 
 ## Acknowledgement
 
