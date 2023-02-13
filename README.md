@@ -64,3 +64,10 @@
     - Add User model
     - Initialize passport and add user to database
     - Add register form for user
+    - POST route for registering new user
+
+## Acknowledgement
+
+This project was done following the final project of
+
+- **The Web Developer Bootcamp 2022** by **Colt Steele**
