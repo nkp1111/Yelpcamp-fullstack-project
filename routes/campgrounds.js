@@ -8,6 +8,8 @@ const { Campground } = require("../models/campground")
 const catchAsync = require("../utils/catchAsync")
 // custom error class
 const { ExpressError } = require("../utils/expressError")
+// middleware for authentication
+const { isLoggedIn } = require("../middleware")
 
 // custom middleware
 const validateCampground = (req, res, next) => {
@@ -27,11 +29,11 @@ router.get("/", catchAsync(async (req, res) => {
 }))
 
 // create new campground
-router.get("/new", (req, res) => {
+router.get("/new", isLoggedIn, (req, res) => {
   res.render("campground/new")
 })
 
-router.post("/", validateCampground, catchAsync(async (req, res, next) => {
+router.post("/", isLoggedIn, validateCampground, catchAsync(async (req, res, next) => {
   let newCamp = new Campground({
     ...req.body
   })
@@ -41,7 +43,7 @@ router.post("/", validateCampground, catchAsync(async (req, res, next) => {
 }))
 
 // edit a campground
-router.get("/:id/edit", catchAsync(async (req, res) => {
+router.get("/:id/edit", isLoggedIn, catchAsync(async (req, res) => {
   const { id } = req.params
   const campground = await Campground.findById(id)
   if (!campground) {
@@ -51,7 +53,7 @@ router.get("/:id/edit", catchAsync(async (req, res) => {
   res.render("campground/edit", { campground })
 }))
 
-router.put("/:id", validateCampground, catchAsync(async (req, res) => {
+router.put("/:id", isLoggedIn, validateCampground, catchAsync(async (req, res) => {
   const { id } = req.params
   const campground = await Campground.findByIdAndUpdate(id, { ...req.body })
   req.flash("success", "Successfully updated campground")
@@ -59,7 +61,7 @@ router.put("/:id", validateCampground, catchAsync(async (req, res) => {
 }))
 
 // delete a campground
-router.delete("/:id", catchAsync(async (req, res) => {
+router.delete("/:id", isLoggedIn, catchAsync(async (req, res) => {
   const { id } = req.params
   await Campground.findByIdAndDelete(id)
   req.flash("success", "Successfully deleted campground")

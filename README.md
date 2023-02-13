@@ -66,6 +66,7 @@
     - Add register form for user
     - POST route for registering new user
     - Add form and POST route for user login
+    - Add middleware for verifying login
 
 ## Acknowledgement
 
