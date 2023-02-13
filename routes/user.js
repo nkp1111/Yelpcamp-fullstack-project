@@ -35,8 +35,10 @@ router.get("/login", (req, res) => {
 })
 
 router.post("/login", passport.authenticate("local", { failureFlash: true, failureRedirect: "/login" }), (req, res) => {
+  const returnUrl = req.session.returnTo || "/campground"
   req.flash("success", "Welcome Back!")
-  res.redirect("/campground")
+  delete req.session.returnTo
+  res.redirect(returnUrl)
 })
 
 // to logout a user
