@@ -8,7 +8,7 @@ const session = require("express-session")
 const flash = require("connect-flash")
 // custom error class
 const { ExpressError } = require("./utils/expressError")
-// Express router
+// Express routes
 const campgroundRoutes = require("./routes/campgrounds")
 const reviewRoutes = require("./routes/reviews")
 const userRoutes = require("./routes/user")
@@ -74,13 +74,13 @@ app.get("/", (req, res) => {
   res.render("home")
 })
 
-// user routes
+// user route
 app.use("/", userRoutes)
 
-// campground routes
+// campground route
 app.use("/campground", campgroundRoutes)
 
-// reviews routes
+// review route
 app.use("/campground/:id/reviews/", reviewRoutes)
 
 

@@ -79,6 +79,7 @@
 
 8. Controllers and Star ratings
     - Refactor campground routes separate control logic to controllers
+    - Refactor reviews routes and user routes to separate control logic
 
 ## Acknowledgement
 
