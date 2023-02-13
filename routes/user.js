@@ -6,17 +6,13 @@ const passport = require("passport")
 // controller
 const user = require("../controllers/user")
 
+router.route("/register")
+  .get(user.renderRegisterForm)
+  .post(catchAsync(user.register))
 
-router.get("/register", user.renderRegisterForm)
-
-router.post("/register", catchAsync(user.register))
-
-router.get("/login", user.renderLoginForm)
-
-router.post("/login",
-  passport.authenticate("local",
-    { failureFlash: true, failureRedirect: "/login" }),
-  user.login)
+router.route("/login")
+  .get(user.renderLoginForm)
+  .post(passport.authenticate("local", { failureFlash: true, failureRedirect: "/login" }), user.login)
 
 router.get("/logout", user.logout)
 
