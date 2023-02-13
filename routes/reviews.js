@@ -1,24 +1,14 @@
 const express = require("express")
 const router = express.Router({ mergeParams: true })
-// joi schemas for validation
-const { reviewSchema } = require("../schemas")
 // database models
 const { Campground } = require("../models/campground")
 const { Review } = require("../models/reviews")
 // wrapper function for async errors
 const catchAsync = require("../utils/catchAsync")
-// custom error class
-const { ExpressError } = require("../utils/expressError")
-
-const validateReview = (req, res, next) => {
-  const { error } = reviewSchema.validate(req.body)
-  if (error) {
-    let message = error.details.map(item => item.message).join(", ")
-    throw new ExpressError(message, 400)
-  } else {
-    next()
-  }
-}
+// middleware for authentication
+const { validateReview } = require("../middleware")
+// // custom error class
+// const { ExpressError } = require("../utils/expressError")
 
 // create a new review for a campground
 router.post("/", validateReview, catchAsync(async (req, res) => {

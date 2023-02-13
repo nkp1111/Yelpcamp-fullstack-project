@@ -1,36 +1,13 @@
 const express = require("express")
 const router = express.Router()
-// joi schemas for validation
-const { campgroundSchema } = require("../schemas")
 // database models
 const { Campground } = require("../models/campground")
 // wrapper function for async errors
 const catchAsync = require("../utils/catchAsync")
-// custom error class
-const { ExpressError } = require("../utils/expressError")
+// // custom error class
+// const { ExpressError } = require("../utils/expressError")
 // middleware for authentication
-const { isLoggedIn } = require("../middleware")
-
-// custom middleware
-const validateCampground = (req, res, next) => {
-  const { error } = campgroundSchema.validate(req.body)
-  if (error) {
-    let message = error.details.map(item => item.message).join(", ")
-    throw new ExpressError(message, 400)
-  } else {
-    next()
-  }
-}
-
-const isAuthor = async (req, res, next) => {
-  const { id } = req.params
-  const campground = await Campground.findById(id)
-  if (!campground.author.equals(req.user._id)) {
-    req.flash("error", "You do not have permission to do this.")
-    return res.redirect(`/campground/${id}`)
-  }
-  next()
-}
+const { isLoggedIn, isAuthor, validateCampground } = require("../middleware")
 
 // view all campgrounds
 router.get("/", catchAsync(async (req, res) => {
