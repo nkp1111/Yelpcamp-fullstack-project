@@ -21,14 +21,16 @@ const sample = (arr) => arr[Math.floor(Math.random() * arr.length)]
 // create 50 random starting campgrounds 
 const seedDB = async () => {
   await Campground.deleteMany()
+  // get random images and descriptions 
+  const { imageUrls, descriptions } = await getImage()
+
   for (let i = 0; i < 50; i++) {
     const randomCity = sample(cities)
-    const imageDescription = await getImage()
     const newCamp = new Campground({
       title: `${sample(descriptors)} ${sample(places)}`,
       location: `${randomCity.city}, ${randomCity.state}`,
-      description: imageDescription.description,
-      image: imageDescription.imageUrl,
+      description: descriptions[i % descriptions.length],
+      image: imageUrls[i % imageUrls.length],
       price: Math.floor(Math.random() * 20) + 10,
       author: "63ea617c8e6734e1a379d4cd",
     })

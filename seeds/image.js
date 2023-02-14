@@ -1,16 +1,19 @@
 const axios = require("axios")
 require("dotenv").config()
-const baseUrl = "https://api.unsplash.com/collections/483251?client_id="
+const baseUrl = "https://api.unsplash.com/collections/483251/photos?per_page=30&client_id="
 
 
 const getImage = async () => {
-  let imageUrl, description
+  let imageUrls = []
+  let descriptions = []
   await axios.get(baseUrl + process.env["SPLASH_ACCESS_KEY"])
     .then(data => {
-      description = data.data.description
-      imageUrl = data.data.preview_photos[0].urls.regular
+      data.data.forEach(item => {
+        descriptions.push(item.description || item.alt_description || "Good place to go")
+        imageUrls.push(item.urls.regular);
+      })
     })
-  return { imageUrl, description }
+  return { imageUrls, descriptions }
 }
 
 

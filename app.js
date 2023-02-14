@@ -81,7 +81,7 @@ app.use("/", userRoutes)
 app.use("/campground", campgroundRoutes)
 
 // review route
-app.use("/campground/:id/reviews/", reviewRoutes)
+app.use("/campground/:id/reviews", reviewRoutes)
 
 
 // unknown routes not defined in server
