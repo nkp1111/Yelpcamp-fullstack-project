@@ -81,6 +81,7 @@
     - Refactor campground routes separate control logic to controllers
     - Refactor reviews routes and user routes to separate control logic
     - Refactor routes by common routes path
+    - Add [starability](https://github.com/LunarLogic/starability) css file for ratings
 
 ## Acknowledgement
 
