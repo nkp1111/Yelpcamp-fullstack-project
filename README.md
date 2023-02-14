@@ -93,6 +93,7 @@
     - Refactor campground PUT route for image addition/upload
     - Refactor file input
     - Add delete image on PUT route for campground
+    - Add separate schema for image and thumbnail size for edit form
 
 ## Acknowledgement
 
