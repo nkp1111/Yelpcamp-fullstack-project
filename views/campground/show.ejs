@@ -3,43 +3,68 @@
 
   <div class="row">
     <div class="col-md-6">
+      <!-- card  -->
       <div class="card my-5">
-        <% for (let img of campground.images) { %>
-          <img src="<%= img.url %>" class="card-img-top" alt="...">
-          <% } %>
-            <div class="card-body">
-              <h5 class="card-title">
-                <%= campground.title %>
-              </h5>
-              <p class="card-text">
-                <%= campground.description%>
-              </p>
-            </div>
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item text-muted">
-                <%= campground.location %>
-              </li>
-              <li class="list-group-item">
-                Submitted by <%= campground.author.username %>
-              </li>
-              <li class="list-group-item">$<%= campground.price %>/night </li>
-            </ul>
-
-            <% if (currentUser && campground.author.equals(currentUser._id)) {%>
-              <div class="card-body">
-                <a href="/campground/<%= campground._id %>/edit" class="card-link btn btn-info text-white">Edit</a>
-                <form action="/campground/<%= campground._id%>?_method=DELETE" method="POST" class="d-inline">
-                  <button class="btn btn-danger">Delete</button>
-                </form>
+        <!-- card head  -->
+        <div id="campgroundCarousel" class="carousel slide">
+          <div class="carousel-inner">
+            <% campground.images.forEach((img, i)=> {%>
+              <div class="carousel-item <%= i === 0?'active': '' %>">
+                <img src="<%= img.url %>" class="d-block w-100" alt="">
               </div>
-              <% } %>
-                <div class="card-footer text-muted">
-                  2 days ago
-                </div>
+              <% }) %>
+          </div>
+
+          <% if(campground.images.length> 1){%>
+            <!-- carousel image control buttons  -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#campgroundCarousel"
+              data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#campgroundCarousel"
+              data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+            <% } %>
+        </div>
+        <!-- card body  -->
+        <div class="card-body">
+          <h5 class="card-title">
+            <%= campground.title %>
+          </h5>
+          <p class="card-text">
+            <%= campground.description%>
+          </p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item text-muted">
+            <%= campground.location %>
+          </li>
+          <li class="list-group-item">
+            Submitted by <%= campground.author.username %>
+          </li>
+          <li class="list-group-item">$<%= campground.price %>/night </li>
+        </ul>
+
+        <% if (currentUser && campground.author.equals(currentUser._id)) {%>
+          <!-- camp edit delete buttons  -->
+          <div class="card-body">
+            <a href="/campground/<%= campground._id %>/edit" class="card-link btn btn-info text-white">Edit</a>
+            <form action="/campground/<%= campground._id%>?_method=DELETE" method="POST" class="d-inline">
+              <button class="btn btn-danger">Delete</button>
+            </form>
+          </div>
+          <% } %>
+            <div class="card-footer text-muted">
+              2 days ago
+            </div>
       </div>
     </div>
 
     <div class="col-md-6 my-5">
+      <!-- review form  -->
       <% if(currentUser) { %>
         <form action="/campground/<%= campground._id%>/reviews" method="POST" class="mb-3 validated-form" novalidate>
           <h2>Leave a Review</h2>
@@ -71,6 +96,7 @@
         <% } %>
 
           <% for (let review of campground.reviews.reverse()) { %>
+            <!-- list of reviews  -->
             <div class="mb-3 card">
               <div class="card-body">
                 <h5 class="card-title">
@@ -83,6 +109,7 @@
                 </p>
 
                 <% if (currentUser && review.author._id.equals(currentUser._id)) {%>
+                  <!-- review delete  -->
                   <form action="/campground/<%= campground._id %>/reviews/<%= review._id %>?_method=DELETE"
                     method="POST">
                     <button class="btn btn-sm btn-danger">Delete</button>
