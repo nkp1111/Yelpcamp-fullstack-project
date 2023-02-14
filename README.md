@@ -90,6 +90,7 @@
     - Add *cloudinary, multer-storage-cloudinary* for uploading image on cloudinary
     - Refactor model, view and controller for multiple images
     - Add bootstrap carousel for images
+    - Refactor campground PUT route for image addition/upload
 
 ## Acknowledgement
 
