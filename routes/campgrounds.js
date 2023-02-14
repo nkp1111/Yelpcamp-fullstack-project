@@ -1,5 +1,8 @@
 const express = require("express")
 const router = express.Router()
+// multer for handling file upload
+const multer = require("multer")
+const upload = multer({ dest: "uploads/" })
 
 // wrapper function for async errors
 const catchAsync = require("../utils/catchAsync")
@@ -11,6 +14,11 @@ const campground = require("../controllers/campground")
 
 router.route("/")
   .get(catchAsync(campground.index))
+  .post(upload.array("image"), (req, res) => {
+    // temp route for testing
+    console.log(req.body, req.files)
+    res.send(req.body)
+  })
   .post(isLoggedIn, validateCampground, catchAsync(campground.createNewCamp))
 
 router.get("/new", isLoggedIn, campground.renderNewForm)

@@ -15,6 +15,7 @@
 - **passport**- library for user/client authentication
 - **passport-local**- *passport* strategy for authenticating with username and password
 - **passport-local-mongoose**- simplifies building username and password login with passport
+- **multer**- to handle file uploads
 
 ## Steps completed
 
@@ -82,6 +83,9 @@
     - Refactor reviews routes and user routes to separate control logic
     - Refactor routes by common routes path
     - Add [starability](https://github.com/LunarLogic/starability) css file for ratings
+
+9. Image Upload
+    - Add *multer* for handling image uploads
 
 ## Acknowledgement
 
