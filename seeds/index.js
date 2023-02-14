@@ -30,7 +30,7 @@ const seedDB = async () => {
       title: `${sample(descriptors)} ${sample(places)}`,
       location: `${randomCity.city}, ${randomCity.state}`,
       description: descriptions[i % descriptions.length],
-      image: imageUrls[i % imageUrls.length],
+      images: [{ url: imageUrls[i % imageUrls.length], filename: "/..." }],
       price: Math.floor(Math.random() * 20) + 10,
       author: "63ea617c8e6734e1a379d4cd",
     })

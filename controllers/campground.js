@@ -17,6 +17,7 @@ const createNewCamp = async (req, res, next) => {
   let newCamp = new Campground({
     ...req.body
   })
+  newCamp.images = req.files.map(f => ({ url: f.path, filename: f.filename }))
   newCamp.author = req.user._id
   newCamp = await newCamp.save()
   req.flash("success", "Successfully made a new campground")
