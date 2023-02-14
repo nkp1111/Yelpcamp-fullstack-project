@@ -24,14 +24,6 @@
       </div>
 
       <div class="mb-3">
-        <label for="image" class="form-label">Add Images</label>
-        <input type="file" name="image" id="image" class="form-control" multiple>
-        <div class="valid-feedback">
-          Looks good!
-        </div>
-      </div>
-
-      <div class="mb-3">
         <label for="price" class="form-label">Price</label>
         <div class="input-group">
           <span class="input-group-text" id="form-price">$</span>
@@ -47,6 +39,14 @@
         <label for="description" class="form-label">Description</label>
         <textarea name="description" id="description" class="form-control"
           required><%= campground.description %></textarea>
+        <div class="valid-feedback">
+          Looks good!
+        </div>
+      </div>
+
+      <div class="mb-3 custom-file">
+        <label for="image" class="form-label custom-file-label">Add more Images</label>
+        <input type="file" name="image" id="image" class="form-control" multiple>
         <div class="valid-feedback">
           Looks good!
         </div>

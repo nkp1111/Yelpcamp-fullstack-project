@@ -91,6 +91,7 @@
     - Refactor model, view and controller for multiple images
     - Add bootstrap carousel for images
     - Refactor campground PUT route for image addition/upload
+    - Refactor file input
 
 ## Acknowledgement
 
