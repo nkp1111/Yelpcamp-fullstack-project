@@ -92,6 +92,7 @@
     - Add bootstrap carousel for images
     - Refactor campground PUT route for image addition/upload
     - Refactor file input
+    - Add delete image on PUT route for campground
 
 ## Acknowledgement
 
