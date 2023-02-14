@@ -16,6 +16,7 @@
 - **passport-local**- *passport* strategy for authenticating with username and password
 - **passport-local-mongoose**- simplifies building username and password login with passport
 - **multer**- to handle file uploads
+- **cloudinary, multer-storage-cloudinary**- To store image on [cloudinary](https://cloudinary.com/)
 
 ## Steps completed
 
@@ -86,6 +87,7 @@
 
 9. Image Upload
     - Add *multer* for handling image uploads
+    - Add *cloudinary, multer-storage-cloudinary* for uploading image on cloudinary
 
 ## Acknowledgement
 
