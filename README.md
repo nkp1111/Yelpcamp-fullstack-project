@@ -95,8 +95,15 @@
     - Add delete image on PUT route for campground
     - Add separate schema for image and thumbnail size for edit form
 
+10. Adding Maps
+    - Add [positionstack](https://positionstack.com/) for location geocode(latitude, longitude)
+
 ## Acknowledgement
 
 This project was done following the final project of
 
 - **The Web Developer Bootcamp 2022** by **Colt Steele**
+
+## Note
+
+- *Adding Maps* section is different than final project.

@@ -1,6 +1,7 @@
 // database model
 const { Campground } = require("../models/campground")
 const { cloudinary } = require("../cloudinary")
+const axios = require("axios")
 
 // view all campgrounds
 const index = async (req, res) => {
@@ -18,6 +19,16 @@ const createNewCamp = async (req, res, next) => {
   let newCamp = new Campground({
     ...req.body
   })
+  // get geocoded data for location
+  const positionStackUrl = `http://api.positionstack.com/v1/forward?access_key=${process.env["POSITION_STACK_API"]}&query=${process.env[req.body.location]}`
+  let lat, long
+  await axios.get(positionStackUrl)
+    .then(data => {
+      const { latitude, longitude } = data.data.data[0]
+      lat = latitude
+      long = longitude
+    })
+  console.log(long, lat)
   newCamp.images = req.files.map(f => ({ url: f.path, filename: f.filename }))
   newCamp.author = req.user._id
   newCamp = await newCamp.save()
