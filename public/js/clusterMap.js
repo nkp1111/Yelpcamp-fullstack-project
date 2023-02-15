@@ -34,7 +34,7 @@ for (let camp of campgrounds) {
   const [long, lat] = camp.geometry.coordinates
   // leaflet follow [lat, long] structure
   const marker = L.marker([lat, long])
-  marker.bindPopup(`${camp.title}`)
+  marker.bindPopup(camp.popUpMarkup)
   markers.addLayer(marker)
 }
 
