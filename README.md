@@ -18,6 +18,7 @@
 - **multer**- to handle file uploads
 - **cloudinary, multer-storage-cloudinary**- To store image on [cloudinary](https://cloudinary.com/)
 - **leaflet**- library for interactive maps
+- **Leaflet.markercluster**- library for creating cluster map on the base of *leaflet* map
 
 ## Steps completed
 
@@ -103,6 +104,9 @@
     - Add campground data in jS to pinpoint correct location of campground on map
     - Add popup on map to show campground info
 
+11. Cluster Map
+    - Add [Leaflet.markercluster](https://github.com/Leaflet/Leaflet.markercluster) links/library for cluster map
+
 ## Acknowledgement
 
 This project was done following the final project of
@@ -115,3 +119,7 @@ This project was done following the final project of
 
 - [*positionstack*](https://positionstack.com/) api for geocode (latitude, longitude) of location
 - [*leaflet*](https://leafletjs.com/) library for viewing maps
+
+### *Cluster Map*(11th section) of project is different
+
+- [*Leaflet.markercluster*](https://www.npmjs.com/package/leaflet.markercluster) library used for cluster map on top of leaflet map
