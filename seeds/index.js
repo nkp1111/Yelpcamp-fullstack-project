@@ -36,6 +36,7 @@ const seedDB = async () => {
         type: "Point",
         coordinates: [randomCity.longitude, randomCity.latitude]
       },
+      // user id of user stored in database
       author: "63ea617c8e6734e1a379d4cd",
     })
     await newCamp.save()
