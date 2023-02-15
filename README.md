@@ -100,6 +100,7 @@
     - Add [positionstack](https://positionstack.com/) for location geocode(latitude, longitude)
     - Refactor campground model to add geometry/ geoJson coordinates of location
     - Add [leaflet](https://leafletjs.com/) for viewing maps
+    - Add campground data in jS to pinpoint correct location of campground on map
 
 ## Acknowledgement
 
@@ -107,8 +108,9 @@ This project was done following the final project of
 
 - **The Web Developer Bootcamp 2022** by **Colt Steele**
 
-## Note
+## Things to Note
 
-- *Adding Maps* section is different than final project.
+### *Adding Maps*(10th section) of project is different
+
 - [*positionstack*](https://positionstack.com/) api for geocode (latitude, longitude) of location
 - [*leaflet*](https://leafletjs.com/) library for viewing maps
