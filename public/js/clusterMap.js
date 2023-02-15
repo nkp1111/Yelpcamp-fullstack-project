@@ -30,10 +30,8 @@ const markers = L.markerClusterGroup({
 });
 
 for (let camp of campgrounds) {
-  // current model coordinate structure [long, lat]
-  const [long, lat] = camp.geometry.coordinates
-  // leaflet follow [lat, long] structure
-  const marker = L.marker([lat, long])
+  const coord = camp.geometry.coordinates
+  const marker = L.marker(coord)
   marker.bindPopup(camp.popUpMarkup)
   markers.addLayer(marker)
 }

@@ -1,8 +1,7 @@
 // leaflet maps: https://leafletjs.com/
 
 // console.log(campground)
-// campground coordinates structure [long, lat] 
-const cur_coord = campground.geometry.coordinates.reverse()
+const cur_coord = campground.geometry.coordinates
 // leaflet follows [lat, long] schema for coordinates
 
 const map = L.map('map').setView(cur_coord, 9);

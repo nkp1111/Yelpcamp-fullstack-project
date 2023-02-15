@@ -30,7 +30,7 @@ const createNewCamp = async (req, res, next) => {
       long = longitude
     })
   // set campground geometry geojson data
-  newCamp.geometry = { type: "Point", coordinates: [long, lat] }
+  newCamp.geometry = { type: "Point", coordinates: [lat, long] }
 
   newCamp.images = req.files.map(f => ({ url: f.path, filename: f.filename }))
   newCamp.author = req.user._id

@@ -37,7 +37,7 @@ const seedDB = async () => {
       price: Math.floor(Math.random() * 20) + 10,
       geometry: {
         type: "Point",
-        coordinates: [randomCity.longitude, randomCity.latitude]
+        coordinates: [randomCity.latitude, randomCity.longitude]
       },
       // user id of user stored in database
       author: "63ea617c8e6734e1a379d4cd",
