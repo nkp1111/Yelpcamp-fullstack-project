@@ -97,6 +97,7 @@
 
 10. Adding Maps
     - Add [positionstack](https://positionstack.com/) for location geocode(latitude, longitude)
+    - Refactor campground model to add geometry/ geoJson coordinates of location
 
 ## Acknowledgement
 

@@ -19,8 +19,9 @@ const createNewCamp = async (req, res, next) => {
   let newCamp = new Campground({
     ...req.body
   })
+
   // get geocoded data for location
-  const positionStackUrl = `http://api.positionstack.com/v1/forward?access_key=${process.env["POSITION_STACK_API"]}&query=${process.env[req.body.location]}`
+  const positionStackUrl = `http://api.positionstack.com/v1/forward?access_key=${process.env["POSITION_STACK_API"]}&query=${req.body.location}`
   let lat, long
   await axios.get(positionStackUrl)
     .then(data => {
@@ -28,10 +29,13 @@ const createNewCamp = async (req, res, next) => {
       lat = latitude
       long = longitude
     })
-  console.log(long, lat)
+  // set campground geometry geojson data
+  newCamp.geometry = { type: "Point", coordinates: [long, lat] }
+
   newCamp.images = req.files.map(f => ({ url: f.path, filename: f.filename }))
   newCamp.author = req.user._id
   newCamp = await newCamp.save()
+  // console.log(newCamp)
   req.flash("success", "Successfully made a new campground")
   res.redirect(`/campground/${newCamp._id}`)
 }

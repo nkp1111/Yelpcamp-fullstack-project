@@ -32,6 +32,10 @@ const seedDB = async () => {
       description: descriptions[i % descriptions.length],
       images: [{ url: imageUrls[i % imageUrls.length], filename: "." }],
       price: Math.floor(Math.random() * 20) + 10,
+      geometry: {
+        type: "Point",
+        coordinates: [randomCity.longitude, randomCity.latitude]
+      },
       author: "63ea617c8e6734e1a379d4cd",
     })
     await newCamp.save()
