@@ -14,3 +14,4 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 
 const marker = L.marker(cur_coord).addTo(map);
 
+marker.bindPopup(`<strong>${campground.title}</strong>`).openPopup();

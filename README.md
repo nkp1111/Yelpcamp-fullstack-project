@@ -101,6 +101,7 @@
     - Refactor campground model to add geometry/ geoJson coordinates of location
     - Add [leaflet](https://leafletjs.com/) for viewing maps
     - Add campground data in jS to pinpoint correct location of campground on map
+    - Add popup on map to show campground info
 
 ## Acknowledgement
 
