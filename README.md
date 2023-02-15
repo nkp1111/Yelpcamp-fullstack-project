@@ -17,6 +17,7 @@
 - **passport-local-mongoose**- simplifies building username and password login with passport
 - **multer**- to handle file uploads
 - **cloudinary, multer-storage-cloudinary**- To store image on [cloudinary](https://cloudinary.com/)
+- **leaflet**- library for interactive maps
 
 ## Steps completed
 
@@ -98,6 +99,7 @@
 10. Adding Maps
     - Add [positionstack](https://positionstack.com/) for location geocode(latitude, longitude)
     - Refactor campground model to add geometry/ geoJson coordinates of location
+    - Add [leaflet](https://leafletjs.com/) for viewing maps
 
 ## Acknowledgement
 
@@ -108,3 +110,5 @@ This project was done following the final project of
 ## Note
 
 - *Adding Maps* section is different than final project.
+- [*positionstack*](https://positionstack.com/) api for geocode (latitude, longitude) of location
+- [*leaflet*](https://leafletjs.com/) library for viewing maps

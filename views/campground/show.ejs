@@ -5,7 +5,9 @@
     <div class="col-md-6">
       <!-- card  -->
       <div class="card my-5">
-        <!-- card head  -->
+        <!-- leaflet map  -->
+        <div class="map" id="map" style="width: 300px;height: 400px"></div>
+        <!-- card head  carousel -->
         <div id="campgroundCarousel" class="carousel slide">
           <div class="carousel-inner">
             <% campground.images.forEach((img, i)=> {%>
@@ -120,3 +122,5 @@
             <%} %>
     </div>
   </div>
+
+  <script src="/js/showPageMap.js"></script>
