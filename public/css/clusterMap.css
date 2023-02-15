@@ -1,0 +1,19 @@
+.cluster {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 24px;
+  border-radius: 50%;
+}
+
+.small-cluster {
+  background-color: greenyellow;
+}
+
+.medium-cluster {
+  background-color: #ffdb58;
+}
+
+.large-cluster {
+  background-color: #58f4ff;
+}

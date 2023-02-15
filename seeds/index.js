@@ -24,13 +24,16 @@ const seedDB = async () => {
   // get random images and descriptions 
   const { imageUrls, descriptions } = await getImage()
 
-  for (let i = 0; i < 50; i++) {
+  for (let i = 0; i < 400; i++) {
     const randomCity = sample(cities)
     const newCamp = new Campground({
       title: `${sample(descriptors)} ${sample(places)}`,
       location: `${randomCity.city}, ${randomCity.state}`,
       description: descriptions[i % descriptions.length],
-      images: [{ url: imageUrls[i % imageUrls.length], filename: "." }],
+      images: [{
+        url: imageUrls[i % imageUrls.length],
+        filename: "."
+      }],
       price: Math.floor(Math.random() * 20) + 10,
       geometry: {
         type: "Point",

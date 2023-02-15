@@ -107,6 +107,7 @@
 11. Cluster Map
     - Add [Leaflet.markercluster](https://github.com/Leaflet/Leaflet.markercluster) links/library for cluster map
     - Add campgrounds data to see campground's cluster map
+    - Changing size and color of cluster on zoom
 
 ## Acknowledgement
 
