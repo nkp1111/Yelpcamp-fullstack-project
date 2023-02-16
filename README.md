@@ -110,6 +110,9 @@
     - Changing size and color of cluster on zoom
     - Add virtual in model to add link as popup for cluster map
 
+12. Applying Styles
+    - Add html content and styles to home page
+
 ## Acknowledgement
 
 This project was done following the final project of
