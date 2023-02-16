@@ -19,7 +19,8 @@
 - **cloudinary, multer-storage-cloudinary**- To store image on [cloudinary](https://cloudinary.com/)
 - **leaflet**- library for interactive maps
 - **Leaflet.markercluster**- library for creating cluster map on the base of *leaflet* map
-- **sanitize-html, express-mongoose-sanitize** for preventing mongo injection
+- **sanitize-html, express-mongoose-sanitize**- for preventing mongo injection
+- **helmet**- for securing app
 
 ## Steps completed
 
@@ -117,6 +118,8 @@
 
 13. Common Security Issue
     - Add sanitize-html and express-mongoose-sanitize for preventing mongo injection
+    - Minor changes to cookies
+    - Add helmet for security
 
 ## Acknowledgement
 

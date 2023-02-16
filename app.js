@@ -17,8 +17,10 @@ const { User } = require("./models/user")
 // passport
 const passport = require("passport")
 const LocalStrategy = require("passport-local")
-// sanitize mongoose
+
 const mongoSanitize = require("express-mongo-sanitize")
+const helmet = require("helmet")
+
 
 // mongoose connection
 mongoose.set("strictQuery", false)
@@ -34,10 +36,13 @@ mongoose.connect(process.env["MONGO_URI"])
 
 // configuration for express session middleware
 const sessionConfig = {
+  name: "session",
   secret: process.env["SESSION_SECRET_KEY"],
   resave: false,
   saveUninitialized: true,
   cookie: {
+    httpOnly: true,
+    // secure: true,
     maxAge: 1000 * 60 * 60 * 24 * 7,
   }
 }
@@ -56,6 +61,56 @@ app.use(flash())
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(mongoSanitize())
+
+// helmet
+const scriptSrcUrls = [
+  "https://stackpath.bootstrapcdn.com/",
+  "https://kit.fontawesome.com/",
+  "https://cdnjs.cloudflare.com/",
+  "https://cdn.jsdelivr.net",
+  "https://unpkg.com/leaflet@1.9.3/",
+  "https://unpkg.com/leaflet.markercluster@1.4.1/",
+];
+const styleSrcUrls = [
+  "https://kit.fontawesome.com/",
+  "https://kit-free.fontawesome.com/",
+  "https://fonts.googleapis.com/",
+  "https://use.fontawesome.com/",
+  "https://cdn.jsdelivr.net",
+  "https://unpkg.com/leaflet@1.9.3/",
+  "https://unpkg.com/leaflet.markercluster@1.4.1/",
+];
+const connectSrcUrls = [
+  "https://kit.fontawesome.com/",
+];
+const fontSrcUrls = [];
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: [],
+      connectSrc: ["'self'", ...connectSrcUrls],
+      scriptSrc: ["'unsafe-inline'", "'self'", ...scriptSrcUrls],
+      styleSrc: ["'self'", "'unsafe-inline'", ...styleSrcUrls],
+      workerSrc: ["'self'", "blob:"],
+      objectSrc: [],
+      imgSrc: [
+        "'self'",
+        "blob:",
+        "data:",
+        "https://res.cloudinary.com/",
+        "https://images.unsplash.com/",
+        "https://unpkg.com/leaflet@1.9.3/",
+        "https://a.tile.openstreetmap.org/",
+        "https://b.tile.openstreetmap.org/",
+        "https://c.tile.openstreetmap.org/",
+        "https://tile.openstreetmap.org/",
+      ],
+      fontSrc: ["'self'", ...fontSrcUrls],
+    },
+    crossOriginEmbedderPolicy: false
+  })
+);
+
 
 passport.use(new LocalStrategy(User.authenticate()))
 passport.serializeUser(User.serializeUser())
