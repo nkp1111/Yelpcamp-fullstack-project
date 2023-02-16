@@ -3,6 +3,7 @@
 ## Links
 
 - Solution Url: [GitHub](https://github.com/nkp1111/Yelpcamp-fullstack-project)
+- Live site Url: [Vercel](https://yelpcamp-fullstack-project.vercel.app/)
 - Live Site Url: [Render](https://nkp1111-yelpcamp.onrender.com/)
 
 ## What I used
@@ -27,6 +28,10 @@
 - **sanitize-html, express-mongoose-sanitize**- for preventing mongo injection
 - **helmet**- for securing app
 - **connect-mongo**- for using session storage to mongo
+
+## Screenshot
+
+![image](./public/images/yelpcamp-home.png)
 
 ## Steps completed
 

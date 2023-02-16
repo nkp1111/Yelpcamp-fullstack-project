@@ -1,7 +1,7 @@
 // console.log(campgrounds)
 const map = L.map('map', {
   maxZoom: 12,
-  minZoom: 2,
+  minZoom: 1,
 }).setView([39, -104], 5)
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
