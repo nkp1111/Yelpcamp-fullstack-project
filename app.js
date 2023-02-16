@@ -17,7 +17,8 @@ const { User } = require("./models/user")
 // passport
 const passport = require("passport")
 const LocalStrategy = require("passport-local")
-
+// sanitize mongoose
+const mongoSanitize = require("express-mongo-sanitize")
 
 // mongoose connection
 mongoose.set("strictQuery", false)
@@ -54,6 +55,7 @@ app.use(session(sessionConfig))
 app.use(flash())
 app.use(passport.initialize())
 app.use(passport.session())
+app.use(mongoSanitize())
 
 passport.use(new LocalStrategy(User.authenticate()))
 passport.serializeUser(User.serializeUser())

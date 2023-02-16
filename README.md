@@ -19,6 +19,7 @@
 - **cloudinary, multer-storage-cloudinary**- To store image on [cloudinary](https://cloudinary.com/)
 - **leaflet**- library for interactive maps
 - **Leaflet.markercluster**- library for creating cluster map on the base of *leaflet* map
+- **sanitize-html, express-mongoose-sanitize** for preventing mongo injection
 
 ## Steps completed
 
@@ -113,6 +114,9 @@
 12. Applying Styles
     - Add html content and styles to home page
     - Add style to login, register form and new, edit campground form
+
+13. Common Security Issue
+    - Add sanitize-html and express-mongoose-sanitize for preventing mongo injection
 
 ## Acknowledgement
 
