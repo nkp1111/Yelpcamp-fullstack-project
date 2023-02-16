@@ -21,6 +21,7 @@
 - **Leaflet.markercluster**- library for creating cluster map on the base of *leaflet* map
 - **sanitize-html, express-mongoose-sanitize**- for preventing mongo injection
 - **helmet**- for securing app
+- **connect-mongo**- for using session storage to mongo
 
 ## Steps completed
 
@@ -120,6 +121,9 @@
     - Add sanitize-html and express-mongoose-sanitize for preventing mongo injection
     - Minor changes to cookies
     - Add helmet for security
+
+14. Deploying the App
+    - Add Mongo store for session storage
 
 ## Acknowledgement
 

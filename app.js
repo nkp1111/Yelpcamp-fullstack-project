@@ -21,10 +21,13 @@ const LocalStrategy = require("passport-local")
 const mongoSanitize = require("express-mongo-sanitize")
 const helmet = require("helmet")
 
+const MongoDBStore = require("connect-mongo")
+
 
 // mongoose connection
+const mongoURI = process.env["MONGO_URI"]
 mongoose.set("strictQuery", false)
-mongoose.connect(process.env["MONGO_URI"])
+mongoose.connect(mongoURI)
   .then(() => {
     console.log("Mongoose connected")
   })
@@ -34,8 +37,20 @@ mongoose.connect(process.env["MONGO_URI"])
   })
 
 
+// mongo store
+let store = MongoDBStore.create({
+  mongoUrl: mongoURI,
+  secret: "Abadsecret",
+  touchAfter: 24 * 60 * 60
+})
+
+store.on("error", function (e) {
+  console.log("session store error", e)
+})
+
 // configuration for express session middleware
 const sessionConfig = {
+  store: store,
   name: "session",
   secret: process.env["SESSION_SECRET_KEY"],
   resave: false,
