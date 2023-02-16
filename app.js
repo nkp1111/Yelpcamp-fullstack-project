@@ -173,3 +173,6 @@ app.use((err, req, res, next) => {
 app.listen(process.env["PORT"] || 3000, () => {
   console.log("App is listening on port 3000");
 })
+
+// Export the Express API
+module.exports = app;
