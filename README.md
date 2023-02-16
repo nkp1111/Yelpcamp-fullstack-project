@@ -112,6 +112,7 @@
 
 12. Applying Styles
     - Add html content and styles to home page
+    - Add style to login, register form and new, edit campground form
 
 ## Acknowledgement
 
