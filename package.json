@@ -4,16 +4,23 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "D:/Projects/Yelpcamp-fullstack-project/node_modules/.bin/netlify-lambda serve .",
-    "build": "D:/Projects/Yelpcamp-fullstack-project/node_modules/.bin/netlify-lambda build ."
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/nkp1111/Yelpcamp-fullstack-project.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "node",
+    "express",
+    "mongoose",
+    "passport",
+    "leaflet",
+    "nkp1111",
+    "yelpcamp",
+    "bootstrap"
+  ],
+  "author": "Neeraj parmar",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/nkp1111/Yelpcamp-fullstack-project/issues"

@@ -134,6 +134,8 @@
 
 14. Deploying the App
     - Add Mongo store for session storage
+    - Deploy site to [vercel](https://vercel.com/)
+    -
 
 ## Acknowledgement
 
