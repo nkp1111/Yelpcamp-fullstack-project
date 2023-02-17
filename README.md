@@ -135,7 +135,7 @@
 14. Deploying the App
     - Add Mongo store for session storage
     - Deploy site to [vercel](https://vercel.com/)
-    -
+    - Final minor adjustments
 
 ## Acknowledgement
 
@@ -153,3 +153,7 @@ This project was done following the final project of
 ### *Cluster Map*(11th section) of project is different
 
 - [*Leaflet.markercluster*](https://www.npmjs.com/package/leaflet.markercluster) library used for cluster map on top of leaflet map
+
+### *Deploying the App*(14th section) of project is different
+
+- [vercel](https://vercel.com/) is used for deploying the app

@@ -25,10 +25,17 @@ const createNewCamp = async (req, res, next) => {
   let lat, long
   await axios.get(positionStackUrl)
     .then(data => {
-      const { latitude, longitude } = data.data.data[0]
-      lat = latitude
-      long = longitude
+      if (data.data.data.length) {
+        const { latitude, longitude } = data.data.data[0]
+        lat = latitude
+        long = longitude
+      }
     })
+  // if location latitude or longitude is not proper
+  if (!lat || !long) {
+    req.flash("error", "Please provide proper 'location' name")
+    return res.redirect("/campground/new")
+  }
   // set campground geometry geojson data
   newCamp.geometry = { type: "Point", coordinates: [lat, long] }
 

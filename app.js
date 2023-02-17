@@ -25,7 +25,7 @@ const MongoDBStore = require("connect-mongo")
 
 
 // mongoose connection
-const mongoURI = process.env["MONGO_URI"]
+const mongoURI = process.env["MONGO_URI"] || "mongodb://127.0.0.1:27017/yelpCampground"
 mongoose.set("strictQuery", false)
 mongoose.connect(mongoURI)
   .then(() => {
@@ -36,11 +36,11 @@ mongoose.connect(mongoURI)
     console.log(err)
   })
 
-
 // mongo store
+const mongoStoreSecret = process.env["MONGO_STORE_SECRET"] || "a_bad_secret"
 let store = MongoDBStore.create({
   mongoUrl: mongoURI,
-  secret: "Abadsecret",
+  secret: mongoStoreSecret,
   touchAfter: 24 * 60 * 60
 })
 
@@ -49,15 +49,16 @@ store.on("error", function (e) {
 })
 
 // configuration for express session middleware
+const sessionSecret = process.env["SESSION_SECRET_KEY"] || "a_bad_secret"
 const sessionConfig = {
   store: store,
   name: "session",
-  secret: process.env["SESSION_SECRET_KEY"],
+  secret: sessionSecret,
   resave: false,
   saveUninitialized: true,
   cookie: {
     httpOnly: true,
-    // secure: true,
+    secure: true,
     maxAge: 1000 * 60 * 60 * 24 * 7,
   }
 }
@@ -77,7 +78,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(mongoSanitize())
 
-// helmet
+// helmet configuration
 const scriptSrcUrls = [
   "https://stackpath.bootstrapcdn.com/",
   "https://kit.fontawesome.com/",
@@ -99,6 +100,7 @@ const connectSrcUrls = [
   "https://kit.fontawesome.com/",
 ];
 const fontSrcUrls = [];
+
 app.use(
   helmet.contentSecurityPolicy({
     directives: {
@@ -126,11 +128,12 @@ app.use(
   })
 );
 
-
+// passport configuration
 passport.use(new LocalStrategy(User.authenticate()))
 passport.serializeUser(User.serializeUser())
 passport.deserializeUser(User.deserializeUser())
 
+// custom middleware
 app.use((req, res, next) => {
   if (!["/", "/login"].includes(req.originalUrl)) {
     req.session.returnTo = req.originalUrl
@@ -155,7 +158,6 @@ app.use("/campground", campgroundRoutes)
 // review route
 app.use("/campground/:id/reviews", reviewRoutes)
 
-
 // unknown routes not defined in server
 app.all("*", (req, res, next) => {
   next(new ExpressError("Page Not Found", 404))
@@ -170,8 +172,9 @@ app.use((err, req, res, next) => {
   res.status(statusCode).render("error", { err })
 })
 
-app.listen(process.env["PORT"] || 3000, () => {
-  console.log("App is listening on port 3000");
+const port = process.env["PORT"] || 3000
+app.listen(port, () => {
+  console.log(`App is listening on port ${port}`);
 })
 
 // Export the Express API

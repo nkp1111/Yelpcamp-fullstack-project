@@ -24,6 +24,10 @@ body {
   border-bottom-color: rgba(255, 255, 255, 0.5);
 }
 
+.nav-link:focus {
+  color: rgba(255, 255, 255, 0.8);
+}
+
 .nav-link.active {
   color: #fff;
   border-bottom-color: #fff;
